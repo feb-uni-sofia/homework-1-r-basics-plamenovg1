@@ -30,6 +30,7 @@ rep(s, each=3)
 
 #g)
 
+## NOTE: by = 1 is the default
 seq(7,21, by=1)
 
 7:21

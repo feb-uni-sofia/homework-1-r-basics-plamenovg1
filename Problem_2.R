@@ -25,6 +25,11 @@ xmin [xmax > avgMAX]
 
 # f)
 
+## NOTE: not DRY (don't repeat yourself)
+## better assign the day names to some vector once
+## and then use that vector to
+## assign to the names of xmin and xmax
+
 names(xmin) <- c('Mon', 'Tue', 'Wed', 'Thu', 'Fri' , 'Sat' , 'Sun')
 names(xmax) <- c('Mon', 'Tue', 'Wed', 'Thu', 'Fri' , 'Sat' , 'Sun')
 
@@ -33,10 +38,21 @@ names(xmax) <- c('Mon', 'Tue', 'Wed', 'Thu', 'Fri' , 'Sat' , 'Sun')
 temperature <- data.frame(xmin,xmax)
 
 # h)
-
-temperature <- within(temperature,{xminFahrenheit <- xmin*9/5 + 32})
+## Readability
+temperature <- within(temperature, {
+	xminFahrenheit <- xmin*9/5 + 32
+})
 
 #i)
+
+## Better
+
+temperatures <- within(temeratures, {
+  xmaxFahrenheit <- xmax * 9/5 + 32
+})
+
+temperaturesFahrenheit <- temperatures[, c('xmaxFahrenheit', 'xminFahrenheit')]
+
 
 ftemp <- data.frame(Max_temp_Fahr = xmax*9/5 + 32 , Min_temp_Fahr = xmin*9/5 + 32)
 
